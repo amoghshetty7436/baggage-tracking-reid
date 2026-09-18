@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 620" width="1240" height="620" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b6472"/>
+    </marker>
+  </defs>
+
+  <rect width="1240" height="620" rx="10" fill="#fbfbfc"/>
+  <rect x="0.5" y="0.5" width="1239" height="619" rx="10" fill="none" stroke="#dfe3e8"/>
+
+  <text x="40" y="46" font-size="21" font-weight="700" fill="#1b1f24">Conveyor baggage intelligence — system overview</text>
+  <text x="40" y="70" font-size="13.5" fill="#5b6472">Five independent perception modules over conveyor and multi-camera video streams.</text>
+
+  <!-- input -->
+  <rect x="40" y="110" width="150" height="86" rx="8" fill="#ffffff" stroke="#c9d1d9" stroke-width="1.5"/>
+  <text x="115" y="140" font-size="12.5" font-weight="700" fill="#1b1f24" text-anchor="middle">Conveyor stream</text>
+  <text x="115" y="161" font-size="11.5" fill="#5b6472" text-anchor="middle">4K, 30 fps</text>
+  <text x="115" y="179" font-size="11.5" fill="#5b6472" text-anchor="middle">fixed overhead camera</text>
+
+  <rect x="40" y="454" width="150" height="86" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="1.5"/>
+  <text x="115" y="484" font-size="12.5" font-weight="700" fill="#1b1f24" text-anchor="middle">Multi-camera</text>
+  <text x="115" y="505" font-size="11.5" fill="#5b6472" text-anchor="middle">non-overlapping views</text>
+  <text x="115" y="523" font-size="11.5" fill="#5b6472" text-anchor="middle">of the same space</text>
+
+  <path d="M 212 153 L 212 516" fill="none" stroke="#5b6472" stroke-width="1.4" opacity="0.4"/>
+  <path d="M 194 153 L 232 153" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 212 284 L 232 284" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 212 404 L 232 404" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 212 516 L 232 516" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 194 497 L 205 497 L 205 497" fill="none" stroke="none"/>
+  <path d="M 194 497 C 330 560 430 540 560 512" fill="none" stroke="#1f6feb" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#a)" opacity="0.85"/>
+
+  <!-- 1 tracking -->
+  <rect x="236" y="100" width="290" height="112" rx="8" fill="#ffffff" stroke="#b31b1b" stroke-width="1.8"/>
+  <rect x="236" y="100" width="290" height="24" rx="8" fill="#b31b1b"/><rect x="236" y="114" width="290" height="10" fill="#b31b1b"/>
+  <text x="381" y="117" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">1 · PERSISTENT TRACKING</text>
+  <text x="381" y="146" font-size="12" fill="#1b1f24" text-anchor="middle">YOLOv8 detection + ByteTrack</text>
+  <text x="381" y="166" font-size="11.5" fill="#5b6472" text-anchor="middle">stable track IDs across occlusion</text>
+  <text x="381" y="184" font-size="11.5" fill="#5b6472" text-anchor="middle">line-zone crossing counts</text>
+  <text x="381" y="202" font-size="11.5" fill="#5b6472" text-anchor="middle">IoU association, 50-frame lost buffer</text>
+
+  <!-- 2 tag -->
+  <rect x="236" y="228" width="290" height="112" rx="8" fill="#ffffff" stroke="#b31b1b" stroke-width="1.8"/>
+  <rect x="236" y="228" width="290" height="24" rx="8" fill="#b31b1b"/><rect x="236" y="242" width="290" height="10" fill="#b31b1b"/>
+  <text x="381" y="245" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">2 · TAGLESS BAGGAGE</text>
+  <text x="381" y="274" font-size="12" fill="#1b1f24" text-anchor="middle">Two-stage cascade</text>
+  <text x="381" y="294" font-size="11.5" fill="#5b6472" text-anchor="middle">COCO YOLOv8 finds suitcase / backpack</text>
+  <text x="381" y="312" font-size="11.5" fill="#5b6472" text-anchor="middle">crop → custom tag detector on the crop</text>
+  <text x="381" y="330" font-size="11.5" fill="#5b6472" text-anchor="middle">no tag found ⇒ flagged</text>
+
+  <!-- 3 tray -->
+  <rect x="236" y="356" width="290" height="96" rx="8" fill="#ffffff" stroke="#b31b1b" stroke-width="1.8"/>
+  <rect x="236" y="356" width="290" height="24" rx="8" fill="#b31b1b"/><rect x="236" y="370" width="290" height="10" fill="#b31b1b"/>
+  <text x="381" y="373" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">3 · TRAY STATE + OVERSIZE</text>
+  <text x="381" y="402" font-size="12" fill="#1b1f24" text-anchor="middle">Custom YOLOv8: bag / bagless</text>
+  <text x="381" y="422" font-size="11.5" fill="#5b6472" text-anchor="middle">empty-tray recirculation detection</text>
+  <text x="381" y="440" font-size="11.5" fill="#5b6472" text-anchor="middle">bounding-box area threshold for oversize</text>
+
+  <!-- 4 anomaly -->
+  <rect x="236" y="468" width="290" height="96" rx="8" fill="#ffffff" stroke="#b31b1b" stroke-width="1.8"/>
+  <rect x="236" y="468" width="290" height="24" rx="8" fill="#b31b1b"/><rect x="236" y="482" width="290" height="10" fill="#b31b1b"/>
+  <text x="381" y="485" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">4 · ANOMALY / DAMAGE</text>
+  <text x="381" y="514" font-size="12" fill="#1b1f24" text-anchor="middle">Convolutional autoencoder</text>
+  <text x="381" y="534" font-size="11.5" fill="#5b6472" text-anchor="middle">trained on nominal frames only</text>
+  <text x="381" y="552" font-size="11.5" fill="#5b6472" text-anchor="middle">reconstruction error ⇒ anomaly score</text>
+
+  <!-- 5 reid -->
+  <rect x="568" y="430" width="300" height="134" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="1.8"/>
+  <rect x="568" y="430" width="300" height="24" rx="8" fill="#1f6feb"/><rect x="568" y="444" width="300" height="10" fill="#1f6feb"/>
+  <text x="718" y="447" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">5 · CROSS-CAMERA PERSON RE-ID</text>
+  <text x="718" y="476" font-size="12" fill="#1b1f24" text-anchor="middle">TransReID feature embeddings</text>
+  <text x="718" y="496" font-size="11.5" fill="#5b6472" text-anchor="middle">cosine-similarity gallery matching</text>
+  <text x="718" y="514" font-size="11.5" fill="#5b6472" text-anchor="middle">re-identifies the same person after</text>
+  <text x="718" y="532" font-size="11.5" fill="#5b6472" text-anchor="middle">they leave one camera's field of view</text>
+  <text x="718" y="554" font-size="11" fill="#8a929d" text-anchor="middle">validated on Market-1501 + custom multi-angle capture</text>
+
+
+  <!-- reid input arrow routed around -->
+
+  <!-- outputs -->
+  <rect x="568" y="100" width="300" height="290" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="1.8"/>
+  <rect x="568" y="100" width="300" height="24" rx="8" fill="#1a7f37"/><rect x="568" y="114" width="300" height="10" fill="#1a7f37"/>
+  <text x="718" y="117" font-size="11.5" font-weight="700" fill="#ffffff" text-anchor="middle">OPERATIONAL OUTPUTS</text>
+  <text x="590" y="150" font-size="12" fill="#1b1f24">• per-item persistent identity along the belt</text>
+  <text x="590" y="176" font-size="12" fill="#1b1f24">• throughput counts at a defined line</text>
+  <text x="590" y="202" font-size="12" fill="#1b1f24">• tagless-baggage exception alerts</text>
+  <text x="590" y="228" font-size="12" fill="#1b1f24">• empty-tray recirculation rate</text>
+  <text x="590" y="254" font-size="12" fill="#1b1f24">• oversize-item diversion flags</text>
+  <text x="590" y="280" font-size="12" fill="#1b1f24">• damaged / anomalous item candidates</text>
+  <text x="590" y="306" font-size="12" fill="#1b1f24">• cross-camera person association</text>
+  <line x1="590" y1="328" x2="846" y2="328" stroke="#e5e8ec"/>
+  <text x="590" y="352" font-size="11.5" fill="#5b6472">Each module runs independently on the same</text>
+  <text x="590" y="370" font-size="11.5" fill="#5b6472">stream, so one failing does not stall the rest.</text>
+
+  <path d="M 530 156 L 564 156" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 530 284 L 548 284 L 548 220 L 564 220" fill="none" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 530 404 L 552 404 L 552 262 L 564 262" fill="none" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M 530 516 L 556 516 L 556 304 L 564 304" fill="none" stroke="#5b6472" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- datasets note -->
+  <rect x="904" y="100" width="296" height="176" rx="8" fill="#ffffff" stroke="#c9d1d9" stroke-width="1.5"/>
+  <text x="1052" y="128" font-size="12.5" font-weight="700" fill="#1b1f24" text-anchor="middle">Dataset construction</text>
+  <text x="926" y="156" font-size="11.5" fill="#5b6472">No public dataset covers tagless or</text>
+  <text x="926" y="174" font-size="11.5" fill="#5b6472">damaged baggage, so the training sets</text>
+  <text x="926" y="192" font-size="11.5" fill="#5b6472">were built from scratch:</text>
+  <text x="926" y="218" font-size="11.5" fill="#1b1f24">• targeted web scraping</text>
+  <text x="926" y="238" font-size="11.5" fill="#1b1f24">• manual bounding-box annotation</text>
+  <text x="926" y="258" font-size="11.5" fill="#1b1f24">• class-balanced train/val splits</text>
+</svg>
